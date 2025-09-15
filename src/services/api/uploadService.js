@@ -1,6 +1,16 @@
 import uploadHistoryData from "@/services/mockData/uploadHistory.json";
 import uploadSettingsData from "@/services/mockData/uploadSettings.json";
 
+// Initialize ApperClient for OpenAI integration
+let apperClient = null;
+if (typeof window !== 'undefined' && window.ApperSDK) {
+  const { ApperClient } = window.ApperSDK;
+  apperClient = new ApperClient({
+    apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+    apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+  });
+}
+
 let uploadHistory = [...uploadHistoryData];
 let uploadSettings = { ...uploadSettingsData };
 
@@ -58,8 +68,47 @@ export const uploadService = {
       onProgress?.(progressSteps[i]);
       
       if (progressSteps[i] === 100) {
-        fileData.status = "completed";
+fileData.status = "completed";
         fileData.uploadedAt = new Date().toISOString();
+
+        // Analyze image with OpenAI if it's an image file
+        if (fileData.type && fileData.type.startsWith('image/') && apperClient) {
+          try {
+            // Convert file to base64 for OpenAI
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+              try {
+                const result = await apperClient.functions.invoke(import.meta.env.VITE_ANALYZE_IMAGE, {
+                  body: JSON.stringify({
+                    imageData: e.target.result,
+                    fileName: fileData.name,
+                    mimeType: fileData.type
+                  }),
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                });
+
+                const response = await result.json();
+                if (response.success) {
+                  fileData.description = response.description;
+                  // Update the file in storage
+                  const historyIndex = uploadHistoryData.findIndex(f => f.Id === fileData.Id);
+                  if (historyIndex >= 0) {
+                    uploadHistoryData[historyIndex] = { ...fileData };
+                  }
+                }
+              } catch (error) {
+                console.log('OpenAI analysis failed:', error);
+                fileData.description = null;
+              }
+            };
+            reader.readAsDataURL(fileData.file || new Blob());
+          } catch (error) {
+            console.log('Image analysis setup failed:', error);
+            fileData.description = null;
+          }
+        }
       }
     }
 

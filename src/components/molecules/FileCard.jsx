@@ -99,9 +99,19 @@ const FileCard = ({
             <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
               <span>{formatFileSize(file.size)}</span>
               {file.uploadedAt && file.status === "completed" && (
-                <span>{format(new Date(file.uploadedAt), "MMM d, h:mm a")}</span>
+<span>{format(new Date(file.uploadedAt), "MMM d, h:mm a")}</span>
               )}
             </div>
+
+            {/* AI Description */}
+            {file.description && (
+              <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded-md">
+                <div className="flex items-start gap-2">
+                  <ApperIcon name="Brain" size={14} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <p className="text-sm text-blue-800 leading-relaxed">{file.description}</p>
+                </div>
+              </div>
+            )}
             
             {(file.status === "uploading" || file.progress > 0) && (
               <div className="space-y-1">

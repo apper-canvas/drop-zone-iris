@@ -7,7 +7,8 @@
     "status": "completed",
     "progress": 100,
     "uploadedAt": "2024-01-15T10:30:00Z",
-    "error": null
+    "error": null,
+    "description": null
   },
   {
     "Id": 2,
@@ -17,7 +18,8 @@
     "status": "completed",
     "progress": 100,
     "uploadedAt": "2024-01-15T09:45:00Z",
-    "error": null
+    "error": null,
+    "description": null
   },
   {
     "Id": 3,
@@ -27,7 +29,8 @@
     "status": "completed",
     "progress": 100,
     "uploadedAt": "2024-01-14T16:20:00Z",
-    "error": null
+    "error": null,
+    "description": "A vibrant landscape photo showing mountains and a clear blue sky with white clouds"
   },
   {
     "Id": 4,
@@ -37,7 +40,8 @@
     "status": "failed",
     "progress": 45,
     "uploadedAt": "2024-01-14T14:10:00Z",
-    "error": "Network timeout during upload"
+    "error": "Network timeout during upload",
+    "description": null
   },
   {
     "Id": 5,
@@ -47,6 +51,7 @@
     "status": "completed",
     "progress": 100,
     "uploadedAt": "2024-01-13T11:30:00Z",
-    "error": null
+    "error": null,
+    "description": null
   }
 ]

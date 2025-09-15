@@ -25,8 +25,9 @@ const FileUploadQueue = ({ newFiles = [], onFilesChange }) => {
         size: file.size,
         type: file.type,
         status: "pending",
-        progress: 0,
+progress: 0,
         uploadedAt: null,
+        description: null,
         error: null,
         file: file // Keep reference to actual File object
       }));
@@ -58,9 +59,9 @@ const FileUploadQueue = ({ newFiles = [], onFilesChange }) => {
         ));
       });
 
-      setFiles(prev => prev.map(f => 
+setFiles(prev => prev.map(f => 
         f.Id === fileData.Id 
-          ? { ...f, status: "completed", progress: 100, uploadedAt: new Date().toISOString() }
+          ? { ...f, status: "completed", progress: 100, uploadedAt: new Date().toISOString(), description: fileData.description }
           : f
       ));
 
@@ -96,8 +97,8 @@ const FileUploadQueue = ({ newFiles = [], onFilesChange }) => {
       });
 
       setFiles(prev => prev.map(f => 
-        f.Id === fileId 
-          ? { ...f, status: "completed", progress: 100, uploadedAt: new Date().toISOString() }
+f.Id === fileId 
+          ? { ...f, status: "completed", progress: 100, uploadedAt: new Date().toISOString(), description: null }
           : f
       ));
 
