@@ -1,0 +1,12 @@
+{
+  "Id": 1,
+  "maxFileSize": 52428800,
+  "allowedTypes": [],
+  "maxConcurrentUploads": 3,
+  "destination": "/uploads",
+  "autoRetry": true,
+  "retryAttempts": 3,
+  "chunkSize": 1048576,
+  "showThumbnails": true,
+  "enableDragDrop": true
+}

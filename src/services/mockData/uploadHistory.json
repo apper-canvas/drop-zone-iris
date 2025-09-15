@@ -1,0 +1,52 @@
+[
+  {
+    "Id": 1,
+    "name": "project-proposal.pdf",
+    "size": 2457600,
+    "type": "application/pdf",
+    "status": "completed",
+    "progress": 100,
+    "uploadedAt": "2024-01-15T10:30:00Z",
+    "error": null
+  },
+  {
+    "Id": 2,
+    "name": "presentation.pptx",
+    "size": 8945120,
+    "type": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+    "status": "completed",
+    "progress": 100,
+    "uploadedAt": "2024-01-15T09:45:00Z",
+    "error": null
+  },
+  {
+    "Id": 3,
+    "name": "sample-image.jpg",
+    "size": 1234567,
+    "type": "image/jpeg",
+    "status": "completed",
+    "progress": 100,
+    "uploadedAt": "2024-01-14T16:20:00Z",
+    "error": null
+  },
+  {
+    "Id": 4,
+    "name": "data-sheet.xlsx",
+    "size": 567890,
+    "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "status": "failed",
+    "progress": 45,
+    "uploadedAt": "2024-01-14T14:10:00Z",
+    "error": "Network timeout during upload"
+  },
+  {
+    "Id": 5,
+    "name": "video-demo.mp4",
+    "size": 15728640,
+    "type": "video/mp4",
+    "status": "completed",
+    "progress": 100,
+    "uploadedAt": "2024-01-13T11:30:00Z",
+    "error": null
+  }
+]
