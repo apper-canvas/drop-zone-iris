@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
-import ApperIcon from "@/components/ApperIcon";
-import Button from "@/components/atoms/Button";
-import Card from "@/components/atoms/Card";
-import FileCard from "@/components/molecules/FileCard";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
-import Empty from "@/components/ui/Empty";
 import { uploadService } from "@/services/api/uploadService";
 import { generateFileId } from "@/utils/fileUtils";
+import ApperIcon from "@/components/ApperIcon";
+import FileCard from "@/components/molecules/FileCard";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
+import Empty from "@/components/ui/Empty";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
 
 const FileUploadQueue = ({ newFiles = [], onFilesChange }) => {
   const [files, setFiles] = useState([]);
@@ -23,13 +23,13 @@ const FileUploadQueue = ({ newFiles = [], onFilesChange }) => {
         Id: generateFileId(),
         name: file.name,
         size: file.size,
-        type: file.type,
-        status: "pending",
+type: file.type,
+status: "pending",
 progress: 0,
-        uploadedAt: null,
-        description: null,
-        error: null,
-        file: file // Keep reference to actual File object
+uploadedAt: null,
+description: null,
+error: null,
+file: file // Keep reference to actual File object
       }));
       
       setFiles(prev => [...filesWithIds, ...prev]);
@@ -51,7 +51,7 @@ progress: 0,
           : f
       ));
 
-      await uploadService.uploadFile(fileData.file, (progress) => {
+await uploadService.uploadFile(fileData.file, (progress) => {
         setFiles(prev => prev.map(f => 
           f.Id === fileData.Id 
             ? { ...f, progress }
@@ -59,12 +59,11 @@ progress: 0,
         ));
       });
 
-setFiles(prev => prev.map(f => 
+      setFiles(prev => prev.map(f => 
         f.Id === fileData.Id 
           ? { ...f, status: "completed", progress: 100, uploadedAt: new Date().toISOString(), description: fileData.description }
           : f
       ));
-
       toast.success(`${fileData.name} uploaded successfully!`);
     } catch (err) {
       setFiles(prev => prev.map(f => 
@@ -88,7 +87,7 @@ setFiles(prev => prev.map(f =>
           : f
       ));
 
-      await uploadService.retryUpload(fileId, (progress) => {
+await uploadService.retryUpload(fileId, (progress) => {
         setFiles(prev => prev.map(f => 
           f.Id === fileId 
             ? { ...f, progress }
@@ -97,11 +96,10 @@ setFiles(prev => prev.map(f =>
       });
 
       setFiles(prev => prev.map(f => 
-f.Id === fileId 
+        f.Id === fileId 
           ? { ...f, status: "completed", progress: 100, uploadedAt: new Date().toISOString(), description: null }
           : f
       ));
-
       toast.success(`${fileData.name} uploaded successfully!`);
     } catch (err) {
       setFiles(prev => prev.map(f => 
